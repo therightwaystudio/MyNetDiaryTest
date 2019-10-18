@@ -9,5 +9,5 @@
     android:paddingEnd="8dp"
     android:scrollbars="vertical"
     android:splitMotionEvents="false"
-    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-    app:spanCount="2" />
+    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+    app:spanCount="@integer/spanCount" />
