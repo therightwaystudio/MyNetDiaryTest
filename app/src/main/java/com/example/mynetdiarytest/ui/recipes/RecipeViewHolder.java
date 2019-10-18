@@ -1,9 +1,5 @@
 package com.example.mynetdiarytest.ui.recipes;
 
-import android.graphics.BlendMode;
-import android.graphics.BlendModeColorFilter;
-import android.graphics.ColorFilter;
-import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.ImageView;
@@ -39,8 +35,13 @@ public class RecipeViewHolder extends RecyclerView.ViewHolder {
         CircularProgressDrawable circularProgressDrawable = new CircularProgressDrawable(itemView.getContext());
         circularProgressDrawable.setStrokeWidth(12f);
         circularProgressDrawable.setCenterRadius(36f);
-        circularProgressDrawable.setColorFilter(ContextCompat.getColor(itemView.getContext(), android.R.color.holo_blue_dark), PorterDuff.Mode.SRC_ATOP);
-        //circularProgressDrawable.setColorSchemeColors(android.R.color.holo_green_dark, android.R.color.holo_red_dark, android.R.color.holo_blue_dark, android.R.color.black);
+        circularProgressDrawable.setColorSchemeColors(
+                ContextCompat.getColor(itemView.getContext(), android.R.color.holo_green_dark),
+                ContextCompat.getColor(itemView.getContext(), android.R.color.holo_red_dark),
+                ContextCompat.getColor(itemView.getContext(), android.R.color.holo_blue_dark),
+                ContextCompat.getColor(itemView.getContext(), android.R.color.holo_orange_dark));
+        circularProgressDrawable.setArrowEnabled(true);
+        circularProgressDrawable.setArrowDimensions(24f, 24f);
         circularProgressDrawable.start();
         GlideApp.with(ivRecipe)
                 .load(recipe.getUrl())

@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.core.app.SharedElementCallback;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.paging.PagedList;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mynetdiarytest.R;
@@ -34,7 +35,7 @@ public class RecipesFragment extends BaseFragment<RecipesViewModel> {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_recipes, container, false);
 
-        recipesAdapter = new RecipesAdapter(new RecipesAdapter.RecipeListener() {
+        recipesAdapter = new RecipesAdapter(new RecipeDiffUtil(),new RecipesAdapter.RecipeListener() {
             @Override
             public void onClick(RecipeViewHolder viewHolder, Recipe recipe) {
                 ((MainActivity) requireActivity()).setPosition(viewHolder.getAdapterPosition());
@@ -71,10 +72,10 @@ public class RecipesFragment extends BaseFragment<RecipesViewModel> {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        viewModel().getRecipesLiveData().observe(getViewLifecycleOwner(), (new Observer<List<Recipe>>() {
+        viewModel().getRecipesLiveData().observe(getViewLifecycleOwner(), (new Observer<PagedList<Recipe>>() {
             @Override
-            public void onChanged(List<Recipe> recipes) {
-                recipesAdapter.replace(recipes);
+            public void onChanged(PagedList<Recipe> recipes) {
+                recipesAdapter.submitList(recipes);
             }
         }));
 

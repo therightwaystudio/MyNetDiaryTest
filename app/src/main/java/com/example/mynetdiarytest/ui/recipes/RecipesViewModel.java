@@ -1,27 +1,31 @@
 package com.example.mynetdiarytest.ui.recipes;
 
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
+import androidx.paging.LivePagedListBuilder;
+import androidx.paging.PagedList;
 
 import com.example.mynetdiarytest.android.mvvm.BaseViewModel;
-import com.example.mynetdiarytest.domain.IRecipesDataSource;
-import com.example.mynetdiarytest.domain.RecipesDataSource;
+import com.example.mynetdiarytest.data.RecipesStorage;
+import com.example.mynetdiarytest.domain.RecipesSourceFactory;
 import com.example.mynetdiarytest.domain.models.Recipe;
-
-import java.util.List;
+import static com.example.mynetdiarytest.utils.Constants.RECIPE_PAGE_SIZE;
 
 public class RecipesViewModel extends BaseViewModel {
 
-    private MutableLiveData<List<Recipe>> recipesMutableLiveData = new MutableLiveData<>();
+    private LiveData<PagedList<Recipe>> recipesLiveData;
 
-    private IRecipesDataSource recipesDataSource = new RecipesDataSource();
+    public RecipesViewModel() {
+        RecipesSourceFactory recipesSourceFactory = new RecipesSourceFactory(new RecipesStorage());
+        PagedList.Config config = new PagedList.Config.Builder()
+                .setEnablePlaceholders(false)
+                .setPageSize(RECIPE_PAGE_SIZE)
+                .build();
 
-    public RecipesViewModel(){
-        recipesMutableLiveData.postValue(recipesDataSource.getRecipes());
+        recipesLiveData = new LivePagedListBuilder<>(recipesSourceFactory, config).build();
     }
 
-    public LiveData<List<Recipe>> getRecipesLiveData() {
-        return recipesMutableLiveData;
+    public LiveData<PagedList<Recipe>> getRecipesLiveData() {
+        return recipesLiveData;
     }
 
 }
