@@ -61,6 +61,7 @@ public class RecipeFragment extends BaseFragment<RecipeViewModel> {
                         return false;
                     }
                 })
+                //.onlyRetrieveFromCache(true)
                 .into(ivRecipe);
 
         return view;
