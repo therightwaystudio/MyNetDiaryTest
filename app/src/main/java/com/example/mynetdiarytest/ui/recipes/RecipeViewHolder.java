@@ -18,15 +18,13 @@ import com.example.mynetdiarytest.R;
 import com.example.mynetdiarytest.domain.models.Recipe;
 import com.example.mynetdiarytest.module.GlideApp;
 
-import java.lang.ref.WeakReference;
-
 public class RecipeViewHolder extends RecyclerView.ViewHolder {
 
-    private WeakReference<RecipesAdapter.RecipeListener> recipeListener;
+    private RecipesAdapter.RecipeListener recipeListener;
 
     public RecipeViewHolder(@NonNull View itemView, RecipesAdapter.RecipeListener recipeListener) {
         super(itemView);
-        this.recipeListener = new WeakReference<>(recipeListener);
+        this.recipeListener = recipeListener;
     }
 
     public void bind(final Recipe recipe) {
@@ -49,17 +47,17 @@ public class RecipeViewHolder extends RecyclerView.ViewHolder {
                 .listener(new RequestListener<Drawable>() {
                     @Override
                     public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                        recipeListener.get().onImageLoaded(getAdapterPosition());
+                        recipeListener.onImageLoaded(getAdapterPosition());
                         return false;
                     }
 
                     @Override
                     public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                        recipeListener.get().onImageLoaded(getAdapterPosition());
+                        recipeListener.onImageLoaded(getAdapterPosition());
                         itemView.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                recipeListener.get().onClick(RecipeViewHolder.this, recipe);
+                                recipeListener.onClick(RecipeViewHolder.this, recipe);
                             }
                         });
                         return false;
