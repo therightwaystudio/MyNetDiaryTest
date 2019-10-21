@@ -4,6 +4,7 @@ import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -31,24 +32,16 @@ public class RecipeViewHolder extends RecyclerView.ViewHolder {
 
     public void bind(final Recipe recipe) {
         final ImageView ivRecipe = itemView.findViewById(R.id.ivRecipe);
+        final ProgressBar progressBar = itemView.findViewById(R.id.progressBar);
 
         ivRecipe.setTransitionName(recipe.getId() + recipe.getUrl());
-
-        final CircularProgressDrawable circularProgressDrawable = new CircularProgressDrawable(itemView.getContext());
-        circularProgressDrawable.setStrokeWidth(12f);
-        circularProgressDrawable.setCenterRadius(36f);
-        circularProgressDrawable.setColorSchemeColors(
-                ContextCompat.getColor(itemView.getContext(), android.R.color.holo_green_dark),
-                ContextCompat.getColor(itemView.getContext(), android.R.color.holo_red_dark),
-                ContextCompat.getColor(itemView.getContext(), android.R.color.holo_blue_dark),
-                ContextCompat.getColor(itemView.getContext(), android.R.color.holo_orange_dark));
-        circularProgressDrawable.setArrowEnabled(true);
-        circularProgressDrawable.setArrowDimensions(24f, 24f);
-        circularProgressDrawable.start();
+        progressBar.setVisibility(View.VISIBLE);
+        progressBar.setProgress(0);
 
         MyNetDiaryGlideModule.expect(recipe.getUrl(), new MyNetDiaryGlideModule.UIonProgressListener() {
             @Override
             public void onProgress(long bytesRead, long expectedLength) {
+                progressBar.setProgress((int)(100*bytesRead/expectedLength));
                 Log.d("onProgress", bytesRead + " " + expectedLength);
             }
 
@@ -60,12 +53,12 @@ public class RecipeViewHolder extends RecyclerView.ViewHolder {
 
         GlideApp.with(ivRecipe)
                 .load(recipe.getUrl())
-                //.placeholder(circularProgressDrawable)
                 .listener(new RequestListener<Drawable>() {
                     @Override
                     public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
                         recipeListener.onImageLoaded(getAdapterPosition());
                         MyNetDiaryGlideModule.forget(recipe.getUrl());
+                        progressBar.setVisibility(View.GONE);
                         return false;
                     }
 
@@ -73,6 +66,7 @@ public class RecipeViewHolder extends RecyclerView.ViewHolder {
                     public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
                         recipeListener.onImageLoaded(getAdapterPosition());
                         MyNetDiaryGlideModule.forget(recipe.getUrl());
+                        progressBar.setVisibility(View.GONE);
                         itemView.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {

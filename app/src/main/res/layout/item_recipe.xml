@@ -11,4 +11,12 @@
         android:layout_gravity="center"
         android:scaleType="fitCenter"/>
 
+    <com.example.mynetdiarytest.ui.customs.PercentProgressBar
+        android:id="@+id/progressBar"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:progressDrawable="@drawable/progress_circle"
+        android:layout_gravity="center"
+        android:layout_width="64dp"
+        android:layout_height="64dp"/>
+
 </FrameLayout>
