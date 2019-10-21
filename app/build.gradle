@@ -48,4 +48,7 @@ dependencies {
 
     //OkHttp
     implementation "com.squareup.okhttp3:okhttp:4.2.1"
+
+    //ScalingImageView
+    implementation 'com.github.chrisbanes:PhotoView:2.0.0'
 }
