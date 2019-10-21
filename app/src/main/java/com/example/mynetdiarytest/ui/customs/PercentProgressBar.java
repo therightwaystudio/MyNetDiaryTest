@@ -38,14 +38,15 @@ public class PercentProgressBar extends ProgressBar {
     @Override
     protected synchronized void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+        if(!isIndeterminate()) {
+            textPaint.setARGB(255, 0, 153, 204);
+            textPaint.setTextAlign(Paint.Align.CENTER);
+            textPaint.setTextSize(textSize);
+            textPaint.setTypeface(Typeface.SANS_SERIF);
 
-        textPaint.setARGB(255, 0, 153 ,204);
-        textPaint.setTextAlign(Paint.Align.CENTER);
-        textPaint.setTextSize(textSize);
-        textPaint.setTypeface(Typeface.SANS_SERIF);
+            String percents = getProgress() + "%";
 
-        String percents = getProgress() + "%";
-
-        canvas.drawText(percents, getWidth()/2F, (getHeight()/2F) - ((textPaint.ascent() + textPaint.descent())/2), textPaint);
+            canvas.drawText(percents, getWidth() / 2F, (getHeight() / 2F) - ((textPaint.ascent() + textPaint.descent()) / 2), textPaint);
+        }
     }
 }
