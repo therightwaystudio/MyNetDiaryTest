@@ -1,15 +1,14 @@
-package com.example.mynetdiarytest.ui;
+package com.example.mynetdiarytest.ui.screens.main;
 
 import android.os.Bundle;
-import android.os.PersistableBundle;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.mynetdiarytest.R;
 import com.example.mynetdiarytest.android.mvvm.BaseActivity;
-import com.example.mynetdiarytest.ui.recipe.RecipeFragment;
-import com.example.mynetdiarytest.ui.recipes.RecipesFragment;
+import com.example.mynetdiarytest.ui.screens.recipe.RecipeFragment;
+import com.example.mynetdiarytest.ui.screens.recipes.RecipesFragment;
 
 public class MainActivity extends BaseActivity<MainActivityViewModel> {
 

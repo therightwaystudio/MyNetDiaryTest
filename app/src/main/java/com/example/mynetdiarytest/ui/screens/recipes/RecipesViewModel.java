@@ -1,4 +1,4 @@
-package com.example.mynetdiarytest.ui.recipes;
+package com.example.mynetdiarytest.ui.screens.recipes;
 
 import androidx.lifecycle.LiveData;
 import androidx.paging.LivePagedListBuilder;

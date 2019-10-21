@@ -1,4 +1,4 @@
-package com.example.mynetdiarytest.ui.recipes;
+package com.example.mynetdiarytest.ui.screens.recipes;
 
 import android.os.Bundle;
 import android.transition.TransitionInflater;
@@ -19,8 +19,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.mynetdiarytest.R;
 import com.example.mynetdiarytest.android.mvvm.BaseFragment;
 import com.example.mynetdiarytest.domain.models.Recipe;
-import com.example.mynetdiarytest.ui.MainActivity;
-import com.example.mynetdiarytest.ui.recipe.RecipeFragment;
+import com.example.mynetdiarytest.ui.screens.main.MainActivity;
+import com.example.mynetdiarytest.ui.screens.recipe.RecipeFragment;
 
 import java.util.List;
 import java.util.Map;

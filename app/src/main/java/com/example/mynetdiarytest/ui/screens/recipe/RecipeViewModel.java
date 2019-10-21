@@ -1,4 +1,4 @@
-package com.example.mynetdiarytest.ui.recipe;
+package com.example.mynetdiarytest.ui.screens.recipe;
 
 import com.example.mynetdiarytest.android.mvvm.BaseViewModel;
 
